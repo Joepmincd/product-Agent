@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <style>
+      .bg{fill:#f7f8fb}
+      .h1{font:700 30px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#20242c}
+      .sub{font:400 17px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+      .head{font:700 19px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#20242c}
+      .role{font:700 18px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#20242c}
+      .txt{font:400 15px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#475467}
+      .small{font:400 14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+      .panel{fill:#fff;stroke:#d0d5dd;stroke-width:1.5;rx:8}
+      .cell{fill:#fff;stroke:#eaecf0;stroke-width:1}
+      .rowhead{fill:#f9fafb;stroke:#eaecf0;stroke-width:1}
+      .left{fill:#f5f8ff;stroke:#84adff;stroke-width:1.5;rx:8}
+      .mid{fill:#fff;stroke:#d0d5dd;stroke-width:1.5;rx:8}
+      .right{fill:#f3fbf6;stroke:#6ce9a6;stroke-width:1.5;rx:8}
+      .line{stroke:#d0d5dd;stroke-width:1}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="72" y="64">协作边界模板：谁负责什么，哪里共同确认</text>
+  <text class="sub" x="72" y="98">适合新能力接入、跨团队分工、上线责任边界；列头和表格必须一一对齐</text>
+
+  <rect class="panel" x="72" y="132" width="1056" height="470"/>
+
+  <rect class="left" x="240" y="160" width="240" height="64"/>
+  <text class="role" x="270" y="188">业务方负责</text>
+  <text class="small" x="270" y="211">能力结果、数据口径、验收标准</text>
+
+  <rect class="mid" x="496" y="160" width="208" height="64"/>
+  <text class="role" x="540" y="188">共同确认</text>
+  <text class="small" x="540" y="211">场景、边界、上线条件</text>
+
+  <rect class="right" x="720" y="160" width="240" height="64"/>
+  <text class="role" x="750" y="188">小贴心负责</text>
+  <text class="small" x="750" y="211">统一入口、对话体验、运营路径</text>
+
+  <line class="line" x1="104" y1="248" x2="1096" y2="248"/>
+
+  <rect class="rowhead" x="104" y="248" width="120" height="82"/>
+  <text class="head" x="132" y="286">能力定义</text>
+  <text class="small" x="132" y="309">范围与输入</text>
+  <rect class="cell" x="224" y="248" width="272" height="82"/>
+  <text class="txt" x="256" y="284">定义目标用户、业务场景</text>
+  <text class="txt" x="256" y="309">明确输入输出和结果口径</text>
+  <rect class="cell" x="496" y="248" width="208" height="82"/>
+  <text class="txt" x="528" y="296">确认是否适合统一对话入口</text>
+  <rect class="cell" x="704" y="248" width="392" height="82"/>
+  <text class="txt" x="736" y="284">转成用户能理解的对话场景</text>
+  <text class="txt" x="736" y="309">设计入口说明和兜底提示</text>
+
+  <rect class="rowhead" x="104" y="330" width="120" height="82"/>
+  <text class="head" x="132" y="368">接入实现</text>
+  <text class="small" x="132" y="391">接口与规则</text>
+  <rect class="cell" x="224" y="330" width="272" height="82"/>
+  <text class="txt" x="256" y="366">提供接口、权限、数据来源</text>
+  <text class="txt" x="256" y="391">补齐异常规则和样例</text>
+  <rect class="cell" x="496" y="330" width="208" height="82"/>
+  <text class="txt" x="528" y="378">确认稳定性和灰度范围</text>
+  <rect class="cell" x="704" y="330" width="392" height="82"/>
+  <text class="txt" x="736" y="366">完成意图识别、上下文处理</text>
+  <text class="txt" x="736" y="391">设计调用链路和失败兜底</text>
+
+  <rect class="rowhead" x="104" y="412" width="120" height="82"/>
+  <text class="head" x="132" y="450">上线运营</text>
+  <text class="small" x="132" y="473">口径与复盘</text>
+  <rect class="cell" x="224" y="412" width="272" height="82"/>
+  <text class="txt" x="256" y="448">确认业务口径、样例和验收</text>
+  <text class="txt" x="256" y="473">提供上线后问题判断</text>
+  <rect class="cell" x="496" y="412" width="208" height="82"/>
+  <text class="txt" x="528" y="460">确认发布节奏和数据指标</text>
+  <rect class="cell" x="704" y="412" width="392" height="82"/>
+  <text class="txt" x="736" y="448">统一命名、推送和资源位</text>
+  <text class="txt" x="736" y="473">沉淀复盘和优化清单</text>
+
+  <rect class="mid" x="296" y="530" width="608" height="44"/>
+  <text class="head" x="328" y="558">一句话边界：</text>
+  <text class="txt" x="456" y="558">业务方定义结果，小贴心负责体验，共同确认场景和上线条件</text>
+</svg>

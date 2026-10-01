@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.t{font:700 20px Arial,"PingFang SC",sans-serif;fill:#20242c}.p{font:400 15px Arial,"PingFang SC",sans-serif;fill:#475467}.card{fill:#fff;stroke:#d0d5dd;stroke-width:2;rx:8}.hot{fill:#fff4ed;stroke:#f79009}.ok{fill:#ecfdf3;stroke:#12b76a}.arr{stroke:#98a2b3;stroke-width:3;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#98a2b3"/></marker></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">流程图模板：申请到复盘</text>
+  <text class="sub" x="70" y="104">适合讲多方协作；建议控制在 6 步以内</text>
+  <rect class="card" x="70" y="250" width="150" height="145"/><text class="t" x="100" y="300">提交需求</text><text class="p" x="100" y="335">目标用户</text><text class="p" x="100" y="362">场景说明</text>
+  <path class="arr" d="M230 322 L300 322"/>
+  <rect class="card" x="310" y="250" width="150" height="145"/><text class="t" x="340" y="300">评估承接</text><text class="p" x="340" y="335">能力状态</text><text class="p" x="340" y="362">体验风险</text>
+  <path class="arr" d="M470 322 L540 322"/>
+  <rect class="card hot" x="550" y="250" width="150" height="145"/><text class="t" x="580" y="300">统一排期</text><text class="p" x="580" y="335">优先级</text><text class="p" x="580" y="362">频率控制</text>
+  <path class="arr" d="M710 322 L780 322"/>
+  <rect class="card" x="790" y="250" width="150" height="145"/><text class="t" x="820" y="300">内容确认</text><text class="p" x="820" y="335">统一口径</text><text class="p" x="820" y="362">统一跳转</text>
+  <path class="arr" d="M950 322 L1020 322"/>
+  <rect class="card ok" x="1030" y="250" width="150" height="145"/><text class="t" x="1060" y="300">上线复盘</text><text class="p" x="1060" y="335">数据表现</text><text class="p" x="1060" y="362">问题反馈</text>
+</svg>

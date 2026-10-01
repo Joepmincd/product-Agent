@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.head{font:700 20px Arial,"PingFang SC",sans-serif;fill:#20242c}.txt{font:400 16px Arial,"PingFang SC",sans-serif;fill:#475467}.table{fill:#fff;stroke:#d0d5dd;stroke-width:2;rx:8}.hc{fill:#eef4ff;stroke:#d0d5dd}.cell{fill:#fff;stroke:#eaecf0}</style></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">矩阵图模板：并列规则对比</text>
+  <text class="sub" x="70" y="104">适合推送、Banner、活动页等资源规范，不用复杂连线</text>
+  <rect class="table" x="90" y="165" width="1020" height="390"/>
+  <rect class="hc" x="90" y="165" width="255" height="70"/><rect class="hc" x="345" y="165" width="255" height="70"/><rect class="hc" x="600" y="165" width="255" height="70"/><rect class="hc" x="855" y="165" width="255" height="70"/>
+  <text class="head" x="165" y="209">维度</text><text class="head" x="435" y="209">资源 A</text><text class="head" x="690" y="209">资源 B</text><text class="head" x="945" y="209">资源 C</text>
+  <rect class="cell" x="90" y="235" width="255" height="80"/><rect class="cell" x="345" y="235" width="255" height="80"/><rect class="cell" x="600" y="235" width="255" height="80"/><rect class="cell" x="855" y="235" width="255" height="80"/>
+  <text class="head" x="145" y="283">适合场景</text><text class="txt" x="375" y="270">短句说明</text><text class="txt" x="630" y="270">短句说明</text><text class="txt" x="885" y="270">短句说明</text>
+  <rect class="cell" x="90" y="315" width="255" height="80"/><rect class="cell" x="345" y="315" width="255" height="80"/><rect class="cell" x="600" y="315" width="255" height="80"/><rect class="cell" x="855" y="315" width="255" height="80"/>
+  <text class="head" x="145" y="363">文案重点</text><text class="txt" x="375" y="350">短句说明</text><text class="txt" x="630" y="350">短句说明</text><text class="txt" x="885" y="350">短句说明</text>
+  <rect class="cell" x="90" y="395" width="255" height="80"/><rect class="cell" x="345" y="395" width="255" height="80"/><rect class="cell" x="600" y="395" width="255" height="80"/><rect class="cell" x="855" y="395" width="255" height="80"/>
+  <text class="head" x="145" y="443">交付要求</text><text class="txt" x="375" y="430">短句说明</text><text class="txt" x="630" y="430">短句说明</text><text class="txt" x="885" y="430">短句说明</text>
+  <rect class="cell" x="90" y="475" width="255" height="80"/><rect class="cell" x="345" y="475" width="255" height="80"/><rect class="cell" x="600" y="475" width="255" height="80"/><rect class="cell" x="855" y="475" width="255" height="80"/>
+  <text class="head" x="145" y="523">复盘指标</text><text class="txt" x="375" y="510">短句说明</text><text class="txt" x="630" y="510">短句说明</text><text class="txt" x="885" y="510">短句说明</text>
+</svg>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "产品 HTML 设计稿与 Demo"
+  short_description: "Build scoped static HTML designs or clickable product demos"
+  default_prompt: "Use $product-team-html-demo to create the requested static HTML design or clickable demo within the confirmed scope."

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.t{font:700 21px Arial,"PingFang SC",sans-serif;fill:#20242c}.p{font:400 16px Arial,"PingFang SC",sans-serif;fill:#475467}.card{fill:#fff;stroke:#d0d5dd;stroke-width:2;rx:8}.line{stroke:#2e6fed;stroke-width:6;stroke-linecap:round}.dot{fill:#2e6fed}</style></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">时间线模板：阶段计划和交付节奏</text>
+  <text class="sub" x="70" y="104">没有确认日期时，用阶段表达，不自行承诺具体时间</text>
+  <line class="line" x1="130" y1="240" x2="1070" y2="240"/>
+  <circle class="dot" cx="150" cy="240" r="14"/><circle class="dot" cx="390" cy="240" r="14"/><circle class="dot" cx="630" cy="240" r="14"/><circle class="dot" cx="870" cy="240" r="14"/><circle class="dot" cx="1070" cy="240" r="14"/>
+  <rect class="card" x="80" y="310" width="200" height="175"/><text class="t" x="110" y="355">阶段一</text><text class="p" x="110" y="395">重点动作</text><text class="p" x="110" y="425">关键产出</text>
+  <rect class="card" x="320" y="310" width="200" height="175"/><text class="t" x="350" y="355">阶段二</text><text class="p" x="350" y="395">重点动作</text><text class="p" x="350" y="425">关键产出</text>
+  <rect class="card" x="560" y="310" width="200" height="175"/><text class="t" x="590" y="355">阶段三</text><text class="p" x="590" y="395">重点动作</text><text class="p" x="590" y="425">关键产出</text>
+  <rect class="card" x="800" y="310" width="200" height="175"/><text class="t" x="830" y="355">阶段四</text><text class="p" x="830" y="395">重点动作</text><text class="p" x="830" y="425">关键产出</text>
+</svg>

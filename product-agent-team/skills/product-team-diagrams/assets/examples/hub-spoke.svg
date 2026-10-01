@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.hub{fill:#eef4ff;stroke:#2e6fed;stroke-width:3;rx:10}.card{fill:#fff;stroke:#d0d5dd;stroke-width:2;rx:8}.t{font:700 20px Arial,"PingFang SC",sans-serif;fill:#20242c}.p{font:400 15px Arial,"PingFang SC",sans-serif;fill:#475467}.line{stroke:#98a2b3;stroke-width:3}</style></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">中心辐射模板：一个核心连接多个能力</text>
+  <text class="sub" x="70" y="104">适合生态能力、模块地图；节点过多时改分组，不画蜘蛛网</text>
+  <line class="line" x1="600" y1="330" x2="300" y2="210"/><line class="line" x1="600" y1="330" x2="300" y2="450"/><line class="line" x1="600" y1="330" x2="900" y2="210"/><line class="line" x1="600" y1="330" x2="900" y2="450"/>
+  <rect class="hub" x="485" y="255" width="230" height="150"/><text class="h1" x="545" y="325">核心入口</text><text class="p" x="538" y="360">统一承接 / 调度</text>
+  <rect class="card" x="170" y="175" width="260" height="70"/><text class="t" x="205" y="207">能力组 A</text><text class="p" x="205" y="228">短句说明</text>
+  <rect class="card" x="170" y="415" width="260" height="70"/><text class="t" x="205" y="447">能力组 B</text><text class="p" x="205" y="468">短句说明</text>
+  <rect class="card" x="770" y="175" width="260" height="70"/><text class="t" x="805" y="207">能力组 C</text><text class="p" x="805" y="228">短句说明</text>
+  <rect class="card" x="770" y="415" width="260" height="70"/><text class="t" x="805" y="447">能力组 D</text><text class="p" x="805" y="468">短句说明</text>
+</svg>

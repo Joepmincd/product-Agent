@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.t{font:700 21px Arial,"PingFang SC",sans-serif;fill:#20242c}.p{font:400 16px Arial,"PingFang SC",sans-serif;fill:#475467}.f1{fill:#eef4ff;stroke:#2e6fed}.f2{fill:#ecfdf3;stroke:#12b76a}.f3{fill:#fff4ed;stroke:#f79009}.f4{fill:#f4f3ff;stroke:#9b8afb}</style></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">指标漏斗模板：只在有真实数据时使用</text>
+  <text class="sub" x="70" y="104">适合曝光到使用转化；没有数据时只画“指标口径”，不编比例</text>
+  <path class="f1" d="M300 165 H900 L830 255 H370 Z" stroke-width="2"/><text class="t" x="520" y="220">曝光 / 到达</text><text class="p" x="735" y="220">真实数值</text>
+  <path class="f2" d="M370 280 H830 L770 370 H430 Z" stroke-width="2"/><text class="t" x="535" y="335">点击 / 进入</text><text class="p" x="690" y="335">真实数值</text>
+  <path class="f3" d="M430 395 H770 L710 485 H490 Z" stroke-width="2"/><text class="t" x="535" y="450">完成动作</text><text class="p" x="635" y="450">真实数值</text>
+  <path class="f4" d="M490 510 H710 L665 590 H535 Z" stroke-width="2"/><text class="t" x="550" y="560">留存</text>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.axis{stroke:#98a2b3;stroke-width:3}.t{font:700 20px Arial,"PingFang SC",sans-serif;fill:#20242c}.p{font:400 15px Arial,"PingFang SC",sans-serif;fill:#475467}.q1{fill:#ecfdf3}.q2{fill:#eef4ff}.q3{fill:#f9fafb}.q4{fill:#fff4ed}.dot{fill:#2e6fed}</style></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">优先级四象限模板：价值与成本判断</text>
+  <text class="sub" x="70" y="104">适合资源排期、需求优先级；坐标必须来自明确判断，不伪装成精确数据</text>
+  <rect class="q2" x="210" y="150" width="390" height="200"/><rect class="q1" x="600" y="150" width="390" height="200"/><rect class="q3" x="210" y="350" width="390" height="200"/><rect class="q4" x="600" y="350" width="390" height="200"/>
+  <line class="axis" x1="210" y1="350" x2="990" y2="350"/><line class="axis" x1="600" y1="150" x2="600" y2="550"/>
+  <text class="t" x="705" y="205">优先推进</text><text class="p" x="705" y="232">高价值 / 低成本</text>
+  <text class="t" x="310" y="205">重点评估</text><text class="p" x="310" y="232">高价值 / 高成本</text>
+  <text class="t" x="705" y="430">快速补位</text><text class="p" x="705" y="457">低价值 / 低成本</text>
+  <text class="t" x="310" y="430">暂缓</text><text class="p" x="310" y="457">低价值 / 高成本</text>
+  <circle class="dot" cx="780" cy="275" r="8"/><text class="p" x="795" y="281">事项 A</text>
+  <circle class="dot" cx="440" cy="290" r="8"/><text class="p" x="455" y="296">事项 B</text>
+  <text class="p" x="575" y="585">实施成本低 → 高</text>
+  <text class="p" x="125" y="355" transform="rotate(-90 125 355)">业务价值低 → 高</text>
+</svg>

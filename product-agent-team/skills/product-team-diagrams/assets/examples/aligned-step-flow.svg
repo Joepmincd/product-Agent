@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <style>
+      .bg{fill:#f7f8fb}
+      .h1{font:700 30px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#20242c;text-anchor:middle}
+      .sub{font:400 17px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085;text-anchor:middle}
+      .card{fill:#fff;stroke:#d0d5dd;stroke-width:1.5;rx:8}
+      .c1{fill:#eef4ff;stroke:#84adff}
+      .c2{fill:#ecfdf3;stroke:#6ce9a6}
+      .c3{fill:#fff7ed;stroke:#fdb022}
+      .c4{fill:#f4f3ff;stroke:#bdb4fe}
+      .dot{fill:#2f6feb}
+      .num{font:700 17px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:middle}
+      .t{font:700 20px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#20242c;text-anchor:middle}
+      .p{font:400 16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085;text-anchor:middle}
+      .line{stroke:#98a2b3;stroke-width:4;stroke-linecap:square}
+      .note{fill:#fff;stroke:#d0d5dd;stroke-width:1.5;rx:8}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="600" y="58">严格对齐步骤流模板</text>
+  <text class="sub" x="600" y="92">所有编号圆心、标题基线、说明基线、连接线共用固定坐标</text>
+
+  <!-- Layout constants: cardY=190 cardW=220 cardH=220 centers=[190,480,770,1060] iconY=250 titleY=328 descY1=372 descY2=400 lineY=250 -->
+  <rect class="card c1" x="80" y="190" width="220" height="220"/>
+  <circle class="dot" cx="190" cy="250" r="24"/>
+  <text class="num" x="190" y="250">1</text>
+  <text class="t" x="190" y="328">统一拉群</text>
+  <text class="p" x="190" y="372">各 Agent 对接人</text>
+  <text class="p" x="190" y="400">进入统一沟通群</text>
+
+  <line class="line" x1="318" y1="250" x2="352" y2="250"/>
+
+  <rect class="card c2" x="370" y="190" width="220" height="220"/>
+  <circle class="dot" cx="480" cy="250" r="24"/>
+  <text class="num" x="480" y="250">2</text>
+  <text class="t" x="480" y="328">同步排期</text>
+  <text class="p" x="480" y="372">推送和 Banner</text>
+  <text class="p" x="480" y="400">统一在群里同步</text>
+
+  <line class="line" x1="608" y1="250" x2="642" y2="250"/>
+
+  <rect class="card c3" x="660" y="190" width="220" height="220"/>
+  <circle class="dot" cx="770" cy="250" r="24"/>
+  <text class="num" x="770" y="250">3</text>
+  <text class="t" x="770" y="328">确认内容</text>
+  <text class="p" x="770" y="372">确认文案和 Banner</text>
+  <text class="p" x="770" y="400">通过轻流流转</text>
+
+  <line class="line" x1="898" y1="250" x2="932" y2="250"/>
+
+  <rect class="card c4" x="950" y="190" width="220" height="220"/>
+  <circle class="dot" cx="1060" cy="250" r="24"/>
+  <text class="num" x="1060" y="250">4</text>
+  <text class="t" x="1060" y="328">上线配置</text>
+  <text class="p" x="1060" y="372">按确认排期</text>
+  <text class="p" x="1060" y="400">完成配置</text>
+
+  <rect class="note" x="260" y="500" width="680" height="56"/>
+  <text class="t" x="600" y="535">硬规则：先定统一坐标，再放图标和文字</text>
+</svg>

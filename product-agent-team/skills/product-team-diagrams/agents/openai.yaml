@@ -1,0 +1,4 @@
+interface:
+  display_name: "结构化做图"
+  short_description: "把复杂信息做成清晰可验证的图表和示意图"
+  default_prompt: "使用 $product-team-diagrams 把这些信息整理成清晰的图表或示意图。"

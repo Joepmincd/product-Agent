@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.lane{fill:#fff;stroke:#d0d5dd;stroke-width:2}.head{fill:#eef4ff;stroke:#d0d5dd;stroke-width:2}.t{font:700 19px Arial,"PingFang SC",sans-serif;fill:#20242c}.p{font:400 16px Arial,"PingFang SC",sans-serif;fill:#475467}.step{fill:#fff;stroke:#84adff;stroke-width:2;rx:8}.arr{stroke:#98a2b3;stroke-width:3;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#98a2b3"/></marker></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">泳道模板：多角色协作流程</text>
+  <text class="sub" x="70" y="104">适合业务方、产品、运营、技术之间的动作分工</text>
+  <rect class="head" x="85" y="150" width="210" height="80"/><text class="t" x="125" y="199">角色 / 阶段</text>
+  <rect class="head" x="295" y="150" width="205" height="80"/><text class="t" x="360" y="199">阶段一</text>
+  <rect class="head" x="500" y="150" width="205" height="80"/><text class="t" x="565" y="199">阶段二</text>
+  <rect class="head" x="705" y="150" width="205" height="80"/><text class="t" x="770" y="199">阶段三</text>
+  <rect class="head" x="910" y="150" width="205" height="80"/><text class="t" x="975" y="199">阶段四</text>
+  <rect class="lane" x="85" y="230" width="1030" height="95"/><text class="t" x="125" y="287">业务方</text><rect class="step" x="330" y="252" width="135" height="50"/><text class="p" x="358" y="283">提需求</text><rect class="step" x="740" y="252" width="135" height="50"/><text class="p" x="759" y="283">确认内容</text>
+  <rect class="lane" x="85" y="325" width="1030" height="95"/><text class="t" x="125" y="382">产品/运营</text><rect class="step" x="535" y="347" width="135" height="50"/><text class="p" x="555" y="378">评估排期</text><rect class="step" x="945" y="347" width="135" height="50"/><text class="p" x="972" y="378">复盘</text>
+  <rect class="lane" x="85" y="420" width="1030" height="95"/><text class="t" x="125" y="477">技术方</text><rect class="step" x="740" y="442" width="135" height="50"/><text class="p" x="759" y="473">配置上线</text>
+  <path class="arr" d="M465 277 L535 372"/><path class="arr" d="M670 372 L740 277"/><path class="arr" d="M808 302 L808 442"/><path class="arr" d="M875 467 L945 372"/>
+</svg>

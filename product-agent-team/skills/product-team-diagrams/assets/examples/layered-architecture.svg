@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.layer{stroke:#d0d5dd;stroke-width:2;rx:8}.l1{fill:#eef4ff}.l2{fill:#ecfdf3}.l3{fill:#fff4ed}.l4{fill:#f4f3ff}.t{font:700 22px Arial,"PingFang SC",sans-serif;fill:#20242c}.p{font:400 16px Arial,"PingFang SC",sans-serif;fill:#475467}.chip{fill:#fff;stroke:#d0d5dd;stroke-width:1.5;rx:8}</style></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">分层架构模板：从用户入口到能力底座</text>
+  <text class="sub" x="70" y="104">适合产品能力架构、平台架构；从上到下讲“用户看到什么 - 中间如何承接 - 底层是什么”</text>
+  <rect class="layer l1" x="150" y="155" width="900" height="88"/><text class="t" x="190" y="207">用户入口层</text><rect class="chip" x="430" y="176" width="170" height="46"/><text class="p" x="470" y="205">入口 A</text><rect class="chip" x="620" y="176" width="170" height="46"/><text class="p" x="660" y="205">入口 B</text>
+  <rect class="layer l2" x="150" y="270" width="900" height="88"/><text class="t" x="190" y="322">场景编排层</text><rect class="chip" x="430" y="291" width="170" height="46"/><text class="p" x="470" y="320">场景 A</text><rect class="chip" x="620" y="291" width="170" height="46"/><text class="p" x="660" y="320">场景 B</text>
+  <rect class="layer l3" x="150" y="385" width="900" height="88"/><text class="t" x="190" y="437">能力服务层</text><rect class="chip" x="430" y="406" width="170" height="46"/><text class="p" x="470" y="435">能力 A</text><rect class="chip" x="620" y="406" width="170" height="46"/><text class="p" x="660" y="435">能力 B</text>
+  <rect class="layer l4" x="150" y="500" width="900" height="88"/><text class="t" x="190" y="552">数据 / 权限层</text><rect class="chip" x="430" y="521" width="170" height="46"/><text class="p" x="470" y="550">数据源</text><rect class="chip" x="620" y="521" width="170" height="46"/><text class="p" x="660" y="550">权限策略</text>
+</svg>

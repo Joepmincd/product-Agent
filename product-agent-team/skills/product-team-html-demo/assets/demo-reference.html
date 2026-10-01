@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Freeze — Feature Demo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'DM Sans', sans-serif; }
+  .mono { font-family: 'DM Mono', monospace; }
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #161922;
+    --surface2: #1e2330;
+    --border: #272d3d;
+    --text: #e8eaf0;
+    --text-dim: #6b738a;
+    --accent: #4f8ef7;
+    --accent-dim: #1e2d4a;
+    --green: #34d37a;
+    --green-dim: #122b1e;
+    --red: #f7564f;
+    --red-dim: #2b1212;
+    --yellow: #f7c34f;
+    --yellow-dim: #2b2112;
+  }
+
+  body { background: var(--bg); color: var(--text); }
+
+  .card-glass {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+
+  .card-visual {
+    background: linear-gradient(135deg, #1a1f35 0%, #0f1520 60%, #161c2e 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-visual::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 60%;
+    height: 160%;
+    background: radial-gradient(circle, rgba(79,142,247,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .frozen-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13,15,20,0.75);
+    backdrop-filter: blur(3px);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s ease;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { background: #6199f8; transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-danger {
+    background: var(--red-dim);
+    color: var(--red);
+    border: 1px solid rgba(247,86,79,0.25);
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-danger:hover { background: rgba(247,86,79,0.15); border-color: rgba(247,86,79,0.4); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 400;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-ghost:hover { background: var(--surface2); color: var(--text); }
+
+  .tx-row {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: opacity 0.3s ease;
+  }
+  .tx-row:last-child { border-bottom: none; }
+  .tx-declined { opacity: 0.4; }
+
+  .tx-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .badge-frozen { background: rgba(79,142,247,0.12); color: var(--accent); }
+  .badge-declined { background: var(--red-dim); color: var(--red); }
+  .badge-success { background: var(--green-dim); color: var(--green); }
+  .badge-pending { background: var(--yellow-dim); color: var(--yellow); }
+
+  .nav-pill {
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text-dim);
+  }
+  .nav-pill.active {
+    background: var(--surface2);
+    color: var(--text);
+  }
+  .nav-pill:hover:not(.active) { color: var(--text); }
+
+  /* Demo Navigator */
+  .demo-nav {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    width: 260px;
+  }
+  .demo-nav-toggle {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .demo-nav-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 8px;
+  }
+  .demo-nav-item {
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text-dim);
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .demo-nav-item:hover { background: var(--surface2); color: var(--text); }
+  .demo-nav-item.active { background: var(--accent-dim); color: var(--accent); }
+  .demo-nav-section {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 10px 10px 4px;
+  }
+
+  /* Validation panel */
+  .vc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .vc-item:last-child { border-bottom: none; }
+
+  .toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 200;
+    white-space: nowrap;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+
+  .fade-in { animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide-up { animation: slideUp 0.3s ease; }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 50;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 16px 32px;
+  }
+  .modal-sheet {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    width: 100%;
+    max-width: 440px;
+    animation: slideUp 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+  }
+
+  .progress-bar-track {
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+    transition: width 0.8s ease;
+  }
+</style>
+</head>
+<body>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">
+  <span id="toast-icon">✓</span>
+  <span id="toast-msg"></span>
+</div>
+
+<!-- App Shell -->
+<div style="max-width: 420px; margin: 0 auto; min-height: 100vh; padding: 0 0 120px;">
+
+  <!-- Header -->
+  <div style="padding: 20px 20px 0; display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 2px;">Good morning</div>
+      <div style="font-size: 18px; font-weight: 600;">Sarah Chen</div>
+    </div>
+    <div style="width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #4f8ef7, #7c4ff7); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px;">SC</div>
+  </div>
+
+  <!-- Tab Nav -->
+  <div style="display: flex; gap: 4px; padding: 16px 20px 0;">
+    <div class="nav-pill active" onclick="switchTab('cards')">Cards</div>
+    <div class="nav-pill" onclick="switchTab('transactions')">Transactions</div>
+    <div class="nav-pill" onclick="switchTab('settings')">Settings</div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div id="content" style="padding: 20px;">
+    <!-- Rendered by JS -->
+  </div>
+</div>
+
+<!-- Modals rendered by JS -->
+<div id="modal-container"></div>
+
+<!-- Demo Navigator -->
+<div class="demo-nav" id="demoNav">
+  <div class="demo-nav-panel" id="demoNavPanel" style="display:none;">
+    <div style="font-weight:600; font-size:13px; margin-bottom:8px; color:var(--text);">🗺 Demo Navigator</div>
+
+    <div class="demo-nav-section">Happy Path</div>
+    <div class="demo-nav-item" id="nav-cards" onclick="jumpTo('cards-default')">💳 Cards — Default</div>
+    <div class="demo-nav-item" onclick="jumpTo('freeze-flow')">❄️ Freeze Card Flow</div>
+    <div class="demo-nav-item" onclick="jumpTo('unfreeze-flow')">🔓 Unfreeze Flow</div>
+
+    <div class="demo-nav-section">Edge States</div>
+    <div class="demo-nav-item" onclick="jumpTo('frozen-attempt')">🚫 Declined Transaction</div>
+    <div class="demo-nav-item" onclick="jumpTo('pending-freeze')">⏳ Pending Freeze</div>
+    <div class="demo-nav-item" onclick="jumpTo('multiple-cards')">📋 Multiple Cards</div>
+    <div class="demo-nav-item" onclick="jumpTo('error-state')">⚠️ Network Error</div>
+
+    <div class="demo-nav-section">Validation</div>
+    <div class="demo-nav-item" onclick="jumpTo('validation')">✓ PRD Criteria</div>
+  </div>
+  <button class="demo-nav-toggle" onclick="toggleDemoNav()">
+    <span>🗺 Demo Navigator</span>
+    <span id="navArrow">▲</span>
+  </button>
+</div>
+
+<script>
+// ─── MOCK DATA ────────────────────────────────────────────────────────────────
+const MOCK = {
+  cards: [
+    {
+      id: 'card-1',
+      name: 'Visa Debit',
+      last4: '4521',
+      type: 'visa',
+      balance: 4218.50,
+      currency: 'USD',
+      frozen: false,
+      pending: false,
+      color: ['#1a1f35', '#0f1520'],
+      primary: true,
+    },
+    {
+      id: 'card-2',
+      name: 'Mastercard Virtual',
+      last4: '8834',
+      type: 'mastercard',
+      balance: 840.00,
+      currency: 'USD',
+      frozen: false,
+      pending: false,
+      color: ['#1f1520', '#150f1a'],
+      primary: false,
+    }
+  ],
+  transactions: [
+    { id: 't1', merchant: 'Whole Foods Market', category: 'Groceries', emoji: '🛒', amount: -68.40, date: 'Today, 10:32 AM', status: 'success', card: 'card-1' },
+    { id: 't2', merchant: 'Spotify', category: 'Subscription', emoji: '🎵', amount: -9.99, date: 'Today, 12:00 AM', status: 'success', card: 'card-1' },
+    { id: 't3', merchant: 'Amazon', category: 'Shopping', emoji: '📦', amount: -124.00, date: 'Yesterday, 3:14 PM', status: 'success', card: 'card-1' },
+    { id: 't4', merchant: 'Direct Deposit — Acme Corp', category: 'Income', emoji: '💰', amount: 3200.00, date: 'Mar 10', status: 'success', card: 'card-1' },
+    { id: 't5', merchant: 'Netflix', category: 'Subscription', emoji: '🎬', amount: -15.49, date: 'Mar 9', status: 'success', card: 'card-2' },
+    { id: 't6', merchant: 'Starbucks', category: 'Coffee', emoji: '☕', amount: -6.80, date: 'Mar 9', status: 'success', card: 'card-1' },
+  ]
+};
+
+// ─── APP STATE ────────────────────────────────────────────────────────────────
+let appState = {
+  tab: 'cards',
+  selectedCard: 'card-1',
+  demoMode: 'cards-default',
+  navOpen: false,
+  showValidation: false,
+};
+
+const getCard = (id) => MOCK.cards.find(c => c.id === id);
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function showToast(msg, icon = '✓', type = 'success') {
+  const t = document.getElementById('toast');
+  const colors = { success: '#34d37a', error: '#f7564f', info: '#4f8ef7' };
+  document.getElementById('toast-icon').textContent = icon;
+  document.getElementById('toast-icon').style.color = colors[type] || colors.success;
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  appState.tab = tab;
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-pill').forEach(p => {
+    if (p.textContent.toLowerCase() === tab) p.classList.add('active');
+  });
+  render();
+}
+
+function toggleDemoNav() {
+  appState.navOpen = !appState.navOpen;
+  document.getElementById('demoNavPanel').style.display = appState.navOpen ? 'block' : 'none';
+  document.getElementById('navArrow').textContent = appState.navOpen ? '▼' : '▲';
+}
+
+function jumpTo(scenario) {
+  appState.demoMode = scenario;
+
+  // Update active nav item
+  document.querySelectorAll('.demo-nav-item').forEach(i => i.classList.remove('active'));
+  document.querySelector(`[onclick="jumpTo('${scenario}')"]`)?.classList.add('active');
+
+  // Reset card states for clean demo
+  MOCK.cards.forEach(c => { c.frozen = false; c.pending = false; });
+
+  switch(scenario) {
+    case 'cards-default':
+      appState.tab = 'cards';
+      appState.selectedCard = 'card-1';
+      break;
+    case 'freeze-flow':
+      appState.tab = 'cards';
+      appState.selectedCard = 'card-1';
+      showFreezeConfirm('card-1');
+      break;
+    case 'unfreeze-flow':
+      appState.tab = 'cards';
+      appState.selectedCard = 'card-1';
+      getCard('card-1').frozen = true;
+      break;
+    case 'frozen-attempt':
+      appState.tab = 'transactions';
+      getCard('card-1').frozen = true;
+      // Add declined tx
+      if (!MOCK.transactions.find(t => t.status === 'declined')) {
+        MOCK.transactions.unshift({
+          id: 'tdeclined', merchant: 'Uber', category: 'Transport', emoji: '🚗',
+          amount: -14.50, date: 'Just now', status: 'declined', card: 'card-1'
+        });
+      }
+      break;
+    case 'pending-freeze':
+      appState.tab = 'cards';
+      appState.selectedCard = 'card-1';
+      getCard('card-1').pending = true;
+      break;
+    case 'multiple-cards':
+      appState.tab = 'cards';
+      appState.selectedCard = 'card-2';
+      break;
+    case 'error-state':
+      appState.tab = 'cards';
+      appState.selectedCard = 'card-1';
+      showFreezeError();
+      break;
+    case 'validation':
+      appState.showValidation = true;
+      break;
+  }
+
+  render();
+  if (scenario !== 'freeze-flow' && scenario !== 'error-state') {
+    appState.demoMode = scenario;
+  }
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function render() {
+  const content = document.getElementById('content');
+
+  if (appState.showValidation) {
+    renderValidation(content);
+    return;
+  }
+
+  switch(appState.tab) {
+    case 'cards': renderCards(content); break;
+    case 'transactions': renderTransactions(content); break;
+    case 'settings': renderSettings(content); break;
+  }
+}
+
+function renderCards(el) {
+  const card = getCard(appState.selectedCard);
+  const otherCard = MOCK.cards.find(c => c.id !== appState.selectedCard);
+
+  el.innerHTML = `
+    <div class="fade-in">
+      <!-- Card Visual -->
+      <div class="card-visual" style="padding: 24px; height: 190px; position: relative; margin-bottom: 20px;">
+        ${card.pending ? `
+          <div style="position:absolute; top:14px; right:14px;">
+            <span class="badge badge-pending">⏳ Freeze pending</span>
+          </div>
+        ` : card.frozen ? `
+          <div style="position:absolute; top:14px; right:14px;">
+            <span class="badge badge-frozen">❄ Frozen</span>
+          </div>
+        ` : ''}
+
+        <div class="frozen-overlay" style="opacity:${card.frozen ? 1 : 0}; pointer-events:${card.frozen ? 'none' : 'none'};">
+          <div style="text-align:center;">
+            <div style="font-size:36px; margin-bottom:8px;">❄️</div>
+            <div style="font-size:14px; font-weight:500; color:var(--accent);">Card Frozen</div>
+            <div style="font-size:12px; color:var(--text-dim); margin-top:4px;">New transactions declined</div>
+          </div>
+        </div>
+
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">${card.name}</div>
+        <div style="font-size: 28px; font-weight: 600; margin-bottom: 28px;">$${card.balance.toLocaleString('en', {minimumFractionDigits:2})}</div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+          <div class="mono" style="font-size: 15px; letter-spacing: 0.15em; color: rgba(255,255,255,0.7);">•••• •••• •••• ${card.last4}</div>
+          <div style="font-size: 11px; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.05em;">${card.type}</div>
+        </div>
+      </div>
+
+      <!-- Other card pill -->
+      ${otherCard ? `
+        <div onclick="selectCard('${otherCard.id}')" style="background:var(--surface2); border:1px solid var(--border); border-radius:12px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; margin-bottom:20px; transition:background 0.15s;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,${otherCard.color[0]},${otherCard.color[1]});display:flex;align-items:center;justify-content:center;font-size:12px;">💳</div>
+            <div>
+              <div style="font-size:13px;font-weight:500;">${otherCard.name}</div>
+              <div style="font-size:12px;color:var(--text-dim);">•••• ${otherCard.last4} ${otherCard.frozen ? '· Frozen' : ''}</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--text-dim);">$${otherCard.balance.toLocaleString('en',{minimumFractionDigits:2})}</div>
+        </div>
+      ` : ''}
+
+      <!-- Quick actions -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px;">
+        <button class="btn-ghost" style="justify-content:center;" onclick="showOutOfScope('View Details')">
+          <span>📄</span> Details
+        </button>
+        <button class="btn-ghost" style="justify-content:center;" onclick="showOutOfScope('Report Issue')">
+          <span>🚨</span> Report
+        </button>
+      </div>
+
+      <!-- Freeze/Unfreeze CTA -->
+      ${card.pending ? `
+        <div style="background:var(--yellow-dim); border:1px solid rgba(247,195,79,0.2); border-radius:12px; padding:16px; text-align:center;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;">
+            <div class="spinner" style="border-top-color:var(--yellow);border-color:rgba(247,195,79,0.2);"></div>
+            <span style="font-weight:500;color:var(--yellow);">Freeze request pending</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-dim);">This may take a moment. Your card is still active.</div>
+        </div>
+      ` : card.frozen ? `
+        <button class="btn-primary" style="width:100%;justify-content:center;background:var(--green);" onclick="startUnfreeze('${card.id}')">
+          🔓 Unfreeze Card
+        </button>
+        <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-dim);">Tap to resume normal card activity</div>
+      ` : `
+        <button class="btn-danger" style="width:100%;justify-content:center;" onclick="showFreezeConfirm('${card.id}')">
+          ❄️ Freeze Card
+        </button>
+        <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-dim);">Temporarily block all new transactions</div>
+      `}
+    </div>
+  `;
+}
+
+function renderTransactions(el) {
+  const cardFilter = MOCK.cards.find(c => c.frozen);
+  const frozenCardId = cardFilter ? cardFilter.id : null;
+
+  el.innerHTML = `
+    <div class="fade-in">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div style="font-weight:600;">Recent Transactions</div>
+        ${frozenCardId ? `<span class="badge badge-frozen">❄ Card frozen</span>` : ''}
+      </div>
+
+      ${frozenCardId ? `
+        <div style="background:var(--accent-dim);border:1px solid rgba(79,142,247,0.2);border-radius:12px;padding:14px;margin-bottom:16px;font-size:13px;">
+          <div style="font-weight:500;color:var(--accent);margin-bottom:4px;">Card is frozen</div>
+          <div style="color:var(--text-dim);">New transactions are being declined. Existing payments like subscriptions continue.</div>
+        </div>
+      ` : ''}
+
+      <div class="card-glass" style="padding:0 16px;">
+        ${MOCK.transactions.map(tx => `
+          <div class="tx-row ${tx.status === 'declined' ? 'tx-declined' : ''}">
+            <div class="tx-icon">${tx.emoji}</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${tx.merchant}</div>
+              <div style="font-size:12px;color:var(--text-dim);">${tx.date}</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:14px;font-weight:500;color:${tx.amount > 0 ? 'var(--green)' : 'var(--text)'};">${tx.amount > 0 ? '+' : ''}$${Math.abs(tx.amount).toFixed(2)}</div>
+              ${tx.status === 'declined' ? `<span class="badge badge-declined" style="font-size:10px;">Declined</span>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderSettings(el) {
+  const card = getCard('card-1');
+  el.innerHTML = `
+    <div class="fade-in">
+      <div style="font-weight:600;margin-bottom:16px;">Card Settings</div>
+      <div class="card-glass" style="padding:0 16px;margin-bottom:16px;">
+        <div class="tx-row">
+          <div class="tx-icon">🔔</div>
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:500;">Transaction alerts</div>
+            <div style="font-size:12px;color:var(--text-dim);">Push notifications for every transaction</div>
+          </div>
+          <div onclick="showOutOfScope('Transaction alerts')" style="cursor:pointer;">
+            <div style="width:40px;height:24px;background:var(--green);border-radius:12px;display:flex;align-items:center;padding:2px 4px;justify-content:flex-end;">
+              <div style="width:20px;height:20px;background:white;border-radius:50%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tx-row">
+          <div class="tx-icon">💳</div>
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:500;">Contactless payments</div>
+            <div style="font-size:12px;color:var(--text-dim);">Tap to pay enabled</div>
+          </div>
+          <div onclick="showOutOfScope('Contactless')" style="cursor:pointer;">
+            <div style="width:40px;height:24px;background:var(--green);border-radius:12px;display:flex;align-items:center;padding:2px 4px;justify-content:flex-end;">
+              <div style="width:20px;height:20px;background:white;border-radius:50%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tx-row">
+          <div class="tx-icon" style="background:${card.frozen ? 'var(--accent-dim)' : 'var(--red-dim)'};">${card.frozen ? '❄️' : '🔴'}</div>
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:500;">Card freeze</div>
+            <div style="font-size:12px;color:var(--text-dim);">${card.frozen ? 'Card is currently frozen' : 'Block all new transactions instantly'}</div>
+          </div>
+          <button onclick="switchTab('cards')" class="btn-ghost" style="padding:6px 12px;font-size:12px;">
+            ${card.frozen ? 'Unfreeze' : 'Manage'}
+          </button>
+        </div>
+      </div>
+      <button class="btn-ghost" style="width:100%;justify-content:center;" onclick="showOutOfScope('Report lost/stolen')">
+        🚨 Report lost or stolen card
+      </button>
+    </div>
+  `;
+}
+
+function renderValidation(el) {
+  const card = getCard('card-1');
+  const checks = [
+    { id: 'VC-001', text: 'User can freeze card within 2 taps from any screen', pass: true },
+    { id: 'VC-002', text: 'Frozen card shows visual indicator (overlay + badge)', pass: true },
+    { id: 'VC-003', text: 'Freeze requires confirmation before executing', pass: true },
+    { id: 'VC-004', text: 'New transactions declined while frozen', pass: true },
+    { id: 'VC-005', text: 'Pending state shown when freeze is processing', pass: true },
+    { id: 'VC-006', text: 'Multiple cards clearly differentiated', pass: true },
+    { id: 'VC-007', text: 'Unfreeze is immediately accessible from card view', pass: true },
+    { id: 'VC-008', text: 'Network error handled gracefully with retry', pass: true },
+    { id: 'VC-009', text: 'Settings tab shows freeze status + link to manage', pass: true },
+    { id: 'VC-010', text: 'Transaction history shows declined status on frozen tx', pass: true },
+  ];
+
+  el.innerHTML = `
+    <div class="fade-in">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div style="font-weight:600;">PRD Validation</div>
+        <button class="btn-ghost" style="font-size:12px;" onclick="appState.showValidation=false;render();">← Back</button>
+      </div>
+
+      <div style="background:var(--green-dim);border:1px solid rgba(52,211,122,0.2);border-radius:12px;padding:14px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:24px;">✅</div>
+        <div>
+          <div style="font-weight:600;color:var(--green);">10/10 criteria met</div>
+          <div style="font-size:12px;color:var(--text-dim);">All acceptance criteria are demonstrated in this demo</div>
+        </div>
+      </div>
+
+      <div class="card-glass" style="padding: 0 16px;">
+        ${checks.map(c => `
+          <div class="vc-item">
+            <div style="color:${c.pass ? 'var(--green)' : 'var(--red)'};margin-top:1px;font-size:16px;">${c.pass ? '✓' : '✗'}</div>
+            <div style="flex:1;">
+              <span class="mono" style="font-size:11px;color:var(--text-dim);">${c.id}</span>
+              <div style="font-size:13px;margin-top:2px;">${c.text}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div style="margin-top:20px;padding:16px;background:var(--surface2);border-radius:12px;">
+        <div style="font-size:13px;font-weight:500;margin-bottom:8px;">Open Questions for Stakeholders</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">
+          1. Should recurring payments (Spotify, Netflix) continue while frozen?<br>
+          2. Freeze same card twice — extend 24h or show current status?<br>
+          3. Does freeze apply to virtual card transactions separately?
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ─── MODALS ───────────────────────────────────────────────────────────────────
+function showFreezeConfirm(cardId) {
+  const card = getCard(cardId);
+  const modal = document.getElementById('modal-container');
+  modal.innerHTML = `
+    <div class="modal-backdrop" onclick="closeModal(event)">
+      <div class="modal-sheet" onclick="event.stopPropagation()">
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="font-size:48px;margin-bottom:12px;">❄️</div>
+          <div style="font-size:18px;font-weight:600;margin-bottom:8px;">Freeze card?</div>
+          <div style="font-size:14px;color:var(--text-dim);line-height:1.5;">
+            <span class="mono">•••• ${card.last4}</span> will be blocked from all new purchases. 
+            You can unfreeze anytime.
+          </div>
+        </div>
+
+        <div style="background:var(--surface2);border-radius:12px;padding:14px;margin-bottom:20px;">
+          <div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;">What continues to work:</div>
+          <div style="font-size:13px;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:8px;"><span style="color:var(--green);">✓</span> Scheduled payments & subscriptions</div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="color:var(--green);">✓</span> Refunds and reversals</div>
+          </div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:10px;margin-bottom:6px;">What gets blocked:</div>
+          <div style="font-size:13px;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:8px;"><span style="color:var(--red);">✗</span> New purchases (online & in-store)</div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="color:var(--red);">✗</span> ATM withdrawals</div>
+          </div>
+        </div>
+
+        <button class="btn-danger" style="width:100%;justify-content:center;margin-bottom:10px;" onclick="executeFreezeWithDelay('${cardId}')">
+          ❄️ Yes, freeze this card
+        </button>
+        <button class="btn-ghost" style="width:100%;justify-content:center;" onclick="closeModal()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function showFreezeError() {
+  const modal = document.getElementById('modal-container');
+  modal.innerHTML = `
+    <div class="modal-backdrop" onclick="closeModal(event)">
+      <div class="modal-sheet" onclick="event.stopPropagation()">
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="font-size:48px;margin-bottom:12px;">⚠️</div>
+          <div style="font-size:18px;font-weight:600;margin-bottom:8px;">Couldn't freeze card</div>
+          <div style="font-size:14px;color:var(--text-dim);line-height:1.5;">
+            We lost connection while processing your request. Your card is still active.
+          </div>
+        </div>
+
+        <div style="background:var(--red-dim);border:1px solid rgba(247,86,79,0.15);border-radius:12px;padding:14px;margin-bottom:20px;font-size:13px;color:var(--text-dim);">
+          Don't worry — no changes were made to your card. Check your connection and try again.
+        </div>
+
+        <button class="btn-primary" style="width:100%;justify-content:center;margin-bottom:10px;" onclick="retryFreeze()">
+          Try again
+        </button>
+        <button class="btn-ghost" style="width:100%;justify-content:center;" onclick="closeModal()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function executeFreezeWithDelay(cardId) {
+  const modal = document.getElementById('modal-container');
+  modal.innerHTML = `
+    <div class="modal-backdrop">
+      <div class="modal-sheet" style="text-align:center;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:14px;padding:20px 0;">
+          <div class="spinner" style="width:28px;height:28px;border-width:3px;"></div>
+          <div>
+            <div style="font-weight:500;margin-bottom:4px;">Freezing card</div>
+            <div style="font-size:13px;color:var(--text-dim);">This takes just a moment...</div>
+          </div>
+        </div>
+        <div class="progress-bar-track" style="margin-top:12px;">
+          <div class="progress-bar-fill" id="progressBar" style="width:0%;"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  // Animate progress bar
+  setTimeout(() => { const pb = document.getElementById('progressBar'); if (pb) pb.style.width = '70%'; }, 100);
+  setTimeout(() => { const pb = document.getElementById('progressBar'); if (pb) pb.style.width = '100%'; }, 700);
+  setTimeout(() => {
+    getCard(cardId).frozen = true;
+    getCard(cardId).pending = false;
+    closeModal();
+    render();
+    showToast('Card frozen. New transactions will be declined.', '❄️', 'info');
+  }, 1000);
+}
+
+function startUnfreeze(cardId) {
+  const modal = document.getElementById('modal-container');
+  modal.innerHTML = `
+    <div class="modal-backdrop" onclick="closeModal(event)">
+      <div class="modal-sheet" onclick="event.stopPropagation()">
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="font-size:48px;margin-bottom:12px;">🔓</div>
+          <div style="font-size:18px;font-weight:600;margin-bottom:8px;">Unfreeze card?</div>
+          <div style="font-size:14px;color:var(--text-dim);">
+            Your card will be active again for all purchases immediately.
+          </div>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center;background:var(--green);margin-bottom:10px;" onclick="executeUnfreeze('${cardId}')">
+          🔓 Yes, unfreeze
+        </button>
+        <button class="btn-ghost" style="width:100%;justify-content:center;" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  `;
+}
+
+function executeUnfreeze(cardId) {
+  closeModal();
+  getCard(cardId).frozen = false;
+  // Remove any declined transactions
+  MOCK.transactions = MOCK.transactions.filter(t => t.status !== 'declined');
+  render();
+  showToast('Card unfrozen. Ready to use.', '🔓', 'success');
+}
+
+function retryFreeze() {
+  closeModal();
+  showFreezeConfirm('card-1');
+}
+
+function closeModal(e) {
+  if (!e || e.target.classList.contains('modal-backdrop')) {
+    document.getElementById('modal-container').innerHTML = '';
+  }
+}
+
+function selectCard(cardId) {
+  appState.selectedCard = cardId;
+  render();
+}
+
+function showOutOfScope(feature) {
+  showToast(`${feature} — out of demo scope`, '💡', 'info');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>

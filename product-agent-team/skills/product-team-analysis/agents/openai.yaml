@@ -1,0 +1,4 @@
+interface:
+  display_name: "产品分析输出"
+  short_description: "将产品盘点收敛为结论型内部汇报与可交付 HTML 材料"
+  default_prompt: "使用 $product-team-analysis，先确认调研目标与范围，再将产品资料整理为结论优先的内部汇报材料。"

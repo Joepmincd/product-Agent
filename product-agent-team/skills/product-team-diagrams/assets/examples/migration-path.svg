@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs><style>.bg{fill:#f7f8fb}.h1{font:700 30px Arial,"PingFang SC",sans-serif;fill:#20242c}.sub{font:400 17px Arial,"PingFang SC",sans-serif;fill:#667085}.t{font:700 22px Arial,"PingFang SC",sans-serif;fill:#20242c}.p{font:400 17px Arial,"PingFang SC",sans-serif;fill:#475467}.small{font:400 14px Arial,"PingFang SC",sans-serif;fill:#667085}.card{fill:#fff;stroke:#d0d5dd;stroke-width:2;rx:8}.warn{fill:#fff7e6;stroke:#f79009}.ok{fill:#ecfdf3;stroke:#12b76a}.arr{stroke:#2e6fed;stroke-width:4;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e6fed"/></marker></defs>
+  <rect class="bg" width="1200" height="675"/>
+  <text class="h1" x="70" y="70">迁移路径模板：让用户感知到升级</text>
+  <text class="sub" x="70" y="104">适合老入口下线、新旧系统切换、能力迁移</text>
+  <rect class="card" x="90" y="220" width="245" height="210"/><text class="t" x="135" y="270">旧入口</text><text class="p" x="135" y="320">页面菜单</text><text class="p" x="135" y="355">历史链接</text><text class="p" x="135" y="390">存量文档</text>
+  <path class="arr" d="M355 325 L460 325"/>
+  <rect class="card warn" x="480" y="220" width="260" height="210"/><text class="t" x="525" y="270">提示 / 跳转期</text><text class="p" x="525" y="320">说明迁移原因</text><text class="p" x="525" y="355">跳到对应能力</text><text class="small" x="525" y="394">保留反馈兜底</text>
+  <path class="arr" d="M760 325 L865 325"/>
+  <rect class="card ok" x="885" y="220" width="245" height="210"/><text class="t" x="930" y="270">新入口</text><text class="p" x="930" y="320">统一承接</text><text class="p" x="930" y="355">按场景使用</text><text class="p" x="930" y="390">数据复盘</text>
+  <rect class="card" x="260" y="505" width="680" height="58"/><text class="t" x="295" y="542">推荐口径：</text><text class="p" x="420" y="542">“该能力已升级，点击后进入新入口继续使用。”</text>
+</svg>
